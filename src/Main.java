@@ -1,35 +1,20 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-/*        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            int a = Integer.parseInt(bufferedReader.readLine());
 
-        int n = scanner.nextInt();
+            String star = "*";
+            for (int i = 1; i <= a; i++) {
+                System.out.println(star);
+                star += "*";
+            }
 
-        System.out.println(n);
-        for(int i = 0 ; i <= n ; i++) {
-            int a = scanner.nextInt();
-            int b = scanner.nextInt();
-            System.out.println("Case #" + i + ": " + (a+b));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        scanner.close();*/
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
-        int a = Integer.parseInt(bufferedReader.readLine());
-
-        StringTokenizer stringTokenizer;
-
-        for (int i = 1; i <= a; i++) {
-            stringTokenizer = new StringTokenizer(bufferedReader.readLine(), " ");
-            System.out.println("Case #" + i + ": " + (Integer.parseInt(stringTokenizer.nextToken()) + Integer.parseInt(stringTokenizer.nextToken())));
-        }
-
-        bufferedReader.close();
-
     }
 }
