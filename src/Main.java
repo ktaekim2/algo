@@ -8,9 +8,14 @@ public class Main {
             int a = Integer.parseInt(bufferedReader.readLine());
 
             String star = "*";
+            String blank = "";
             for (int i = 1; i <= a; i++) {
-                System.out.println(star);
+                for (int j = 0; j < a - i; j++) {
+                    blank += " ";
+                }
+                System.out.println(blank + star);
                 star += "*";
+                blank = "";
             }
 
         } catch (IOException e) {
