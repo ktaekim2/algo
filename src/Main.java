@@ -2,56 +2,16 @@ import com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI;
 import sun.util.BuddhistCalendar;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.nio.Buffer;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-        // 배열X
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-        int max = -1000001;
-        int min = 1000001;
-
-        while(st.hasMoreTokens()) {
-            int val = Integer.parseInt(st.nextToken());
-            if(val > max) {
-                max = val;
-            }
-            if(val < min) {
-                min = val;
-            }
-        }
-        System.out.println(min + " " + max);
-
 /*
-        // 버퍼리더 sort 사용
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int N = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-        int index = 0;
-        int[] arr = new int[N];
-        while(st.hasMoreTokens()) {
-            arr[index] = Integer.parseInt(st.nextToken());
-            index++;
-        }
-
-        Arrays.sort(arr);
-        System.out.println(arr[0] + " " + arr[N - 1]);
-*/
-
-/*
-        // 스캐너 사용
+        // 스캐너 사용 자작
         Scanner in = new Scanner(System.in);
 
-        int N = in.nextInt();
+        int N = 9;
         int[] arr = new int[N];
 
         for (int i = 0; i < N; i++) {
@@ -59,61 +19,122 @@ public class Main {
         }
 
         in.close();
-        Arrays.sort(arr);
-        System.out.println(arr[0] + " " + arr[N - 1]  );
+
+        int max = 0;
+        int maxIndex = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            int compIdx = arr[i];
+            if(i == 0) {
+                max = compIdx;
+                maxIndex = i;
+                continue;
+            }
+            if(compIdx > max) {
+                max = compIdx;
+                maxIndex = i;
+            }
+        }
+
+        System.out.println(max);
+        System.out.println(maxIndex + 1);
+ */
+
+/*
+        // 방법 1 - 스캐너
+        Scanner in = new Scanner(System.in);
+        int[] arr = {
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+        };
+        in.close();
+
+        int count = 0;
+        int max = 0;
+        int index = 0;
+
+        for(int value : arr) {
+            count++;
+
+            if(value > max) {
+                max = value;
+                index = count;
+            }
+        }
+        System.out.println(max + "\n" + index);
+ */
+
+/*
+        // 방법 1-2 - 스캐너 + Collections 사용
+        Scanner in = new Scanner(System.in);
+        List<Integer> list = Arrays.asList(
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt(),
+                in.nextInt()
+        );
+        in.close();
+
+        int val = Collections.max(list);
+        int idx = list.indexOf(val) + 1;
+
+        System.out.println(val);
+        System.out.println(idx);
 */
 
 /*
-        // 버퍼리더 자작
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));) {
+        // 방법 2 - 버퍼리더
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-            String inputLine = br.readLine();
-            StringTokenizer st = new StringTokenizer(inputLine, " ");
+        int[] arr = new int[9];
 
-            int n = Integer.parseInt(st.nextToken());
-
-            int[] array = new int[n];
-
-            String ar = br.readLine();
-            st = new StringTokenizer(ar, " ");
-
-            for (int i = 0; i < n; i++) {
-                if (st.hasMoreTokens()) {
-                    array[i] = Integer.parseInt(st.nextToken());
-                }
-            }
-
-            int max = 0;
-            int min = 0;
-
-            for (int i = 0; i < array.length; i++) {
-                int compIdx = array[i];
-                if(i == 0) {
-                    max = compIdx;
-                    min = compIdx;
-                    continue;
-                }
-                if(compIdx > max) {
-                    max = compIdx;
-                }
-
-                if(compIdx < min) {
-                    min = compIdx;
-                }
-            }
-
-            String result = "";
-
-            result = min + " " + max;
-
-            bw.write(result);
-            bw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 9; i++) {
+            arr[i] = Integer.parseInt(br.readLine());
         }
+
+        int max = 0;
+        int maxIndex = 0;
+
+        for(int i = 0; i < arr.length; i++) {
+            if(max < arr[i]) {
+                max = arr[i];
+                maxIndex = i;
+            }
+        }
+
+        System.out.println(max);
+        System.out.println(maxIndex + 1);
 */
 
+        // 방법 33 - 배열X
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int max = 0;
+        int index = 0;
+
+        for(int i = 0; i < 9; i++) {
+            int val = Integer.parseInt(br.readLine());
+
+            if(val > max) {
+                max = val;
+                index = i;
+            }
+        }
+
+        System.out.println(max);
+        System.out.println(index + 1);
 
     }
 }
